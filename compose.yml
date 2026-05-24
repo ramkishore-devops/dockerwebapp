@@ -5,10 +5,21 @@ services:
    image: ramkishore9/poc:imagedb
    ports:
      - "3306:3306"
+   deploy:
+    replicas: 4
+   networks:
+    - dock-n/w
 
  application:
    image: ramkishore9/poc:imageapp
    ports:
      - "1111:8080"
+   deploy:
+    replicas: 3
+   networks:
+    - dock-n/w
    depends_on:
      - "devopsdb"
+networks:
+ dock-n/w:
+  driver: overlay
